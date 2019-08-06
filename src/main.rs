@@ -1,6 +1,7 @@
 extern crate config;
 extern crate serde;
 extern crate reqwest;
+extern crate serde_json;
 
 #[macro_use] extern crate serde_derive;
 #[macro_use] extern crate clap;
@@ -20,13 +21,13 @@ enum Error {
     Config(config::ConfigError),
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 struct Message {
     id: String,
     text: String
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 struct Messages {
     messages: Vec<Message>
 }
@@ -43,7 +44,8 @@ fn list(api_client: &API, query: &str) -> Result<Messages, ()> {
     match response.json::<Messages>() {
         Ok(json) => {
             for message in &json.messages {
-                println!("{:?}", message);
+                let json = serde_json::to_string(message).unwrap();
+                println!("{}", json);
             }
 
             Ok(json)
@@ -65,7 +67,8 @@ fn post(api_client: &API, text: &str) -> Result<Message, ()> {
 
     match response.json::<Message>() {
         Ok(json) => {
-            println!("{:?}", json);
+            let pretty_json = serde_json::to_string(&json).unwrap();
+            println!("{}", pretty_json);
 
             Ok(json)
         },

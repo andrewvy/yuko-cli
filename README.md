@@ -21,6 +21,6 @@ You can get your API token from your accounts page at: [yuko.app/account](https:
 
 ### Usage
 
-`yuko-cli post "Pubish that yuko-cli project. #todo #yuko"`
+`yuko-cli post "Publish that yuko-cli project. #todo #yuko"`
 
 `yuko-cli list "#todo #yuko"`
