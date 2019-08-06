@@ -5,7 +5,7 @@ CLI tool to [yuko.app](https://yuko.app).
 ### Installation
 
 - Clone this repo.
-- `cargo install`
+- `cargo install --path .`
 
 Yuko expects a `~/.config/yuko/config.json` to be created, with the format of:
 
